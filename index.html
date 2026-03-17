@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>זנבנבים - קסם של ילדות | עבודת יד</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --primary-dark: #EE5253;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --text-dark: #2D3436;
+            --text-light: #636E72;
+            --bg-light: #F9F9F9;
+            --white: #FFFFFF;
+            --shadow-subtle: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-card: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        header {
+            background-color: var(--white);
+            padding: 20px 0;
+            box-shadow: var(--shadow-subtle);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+
+        .cta-nav {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .cta-nav:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+
+        .hero { padding: 160px 0 80px 0; background: linear-gradient(135deg, #fff 0%, #f3f3f3 100%); }
+
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+
+        .hero-text h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+
+        .hero-text h1 span { color: var(--primary); }
+
+        .hero-text p { font-size: 1.25rem; color: var(--text-light); margin-bottom: 40px; }
+
+        .hero-image-container { position: relative; }
+
+        .hero-image {
+            width: 100%;
+            border-radius: 30px;
+            box-shadow: var(--shadow-card);
+            transform: rotate(-2deg);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover { transform: rotate(0deg) scale(1.02); }
+
+        .hero-image-container::before {
+            content: ''; position: absolute; width: 100%; height: 100%;
+            background-color: var(--accent); top: 20px; right: -20px;
+            border-radius: 30px; z-index: -1; opacity: 0.6;
+        }
+
+        .details-form { padding: 80px 0; background-color: var(--white); }
+
+        .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+
+        .benefits h2 { font-size: 2.5rem; margin-bottom: 30px; }
+
+        .benefit-item { display: flex; align-items: start; margin-bottom: 25px; }
+
+        .benefit-icon {
+            background-color: var(--secondary); color: var(--white);
+            width: 50px; height: 50px; border-radius: 15px;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem; margin-left: 20px; flex-shrink: 0;
+        }
+
+        .form-box {
+            background-color: var(--bg-light); padding: 40px;
+            border-radius: 20px; box-shadow: var(--shadow-subtle);
+            border: 1px solid #eee;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label { display: block; font-weight: 500; margin-bottom: 8px; }
+
+        .form-group input, .form-group select {
+            width: 100%; padding: 15px; border: 2px solid #E2E8F0;
+            border-radius: 12px; font-family: 'Rubik', sans-serif;
+            background-color: var(--white); transition: var(--transition);
+        }
+
+        .form-group input:focus { outline: none; border-color: var(--secondary); }
+
+        .submit-btn {
+            width: 100%; padding: 18px; background-color: var(--primary);
+            color: var(--white); border: none; border-radius: 12px;
+            font-size: 1.2rem; font-weight: 600; cursor: pointer;
+            transition: var(--transition); box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .submit-btn:hover { background-color: var(--primary-dark); transform: translateY(-3px); }
+
+        #responseMessage { margin-top: 20px; padding: 15px; border-radius: 12px; text-align: center; display: none; }
+
+        .success { background-color: #D1FAE5; color: #065F46; border: 1px solid #10B981; }
+
+        .error { background-color: #FEE2E2; color: #991B1B; border: 1px solid #EF4444; }
+
+        @media (max-width: 992px) {
+            .hero-grid, .details-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-text h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">זנבנבים</a>
+            <a href="#orderForm" class="cta-nav">להזמנה מהירה</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>החבר החדש <span>והכי רך</span> של הילדים</h1>
+                <p>זנבנבים בעבודת יד שמעוררים את הדמיון. מתנה מושלמת שילדים פשוט לא רוצים להוריד.</p>
+                <a href="#orderForm" class="cta-nav" style="padding: 15px 40px;">אני רוצה זנבנב!</a>
+            </div>
+            <div class="hero-image-container">
+                <img src="https://image.pollinations.ai/prompt/Two%20happy%20children%20playing%20with%20colorful%20handmade%20plush%20animal%20tails%20attached%20to%20their%20waist,%20joyful%20atmosphere,%20bright%20playroom,%20high%20quality%20photography" alt="ילדים משחקים" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="details-form" id="orderForm">
+        <div class="container details-grid">
+            <div class="benefits">
+                <h2>למה זנבנב?</h2>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🧸</div>
+                    <div class="benefit-text"><h4>איכות ללא פשרות</h4><p>חומרים היפואלרגניים ורכים במיוחד.</p></div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎨</div>
+                    <div class="benefit-text"><h4>עיצוב אישי</h4><p>כל זנבנב הוא יחיד ומיוחד במינו.</p></div>
+                </div>
+            </div>
+
+            <div class="form-box">
+                <h3>השאירו פרטים ונחזור אליכם</h3>
+                <form id="znavnavForm">
+                    <div class="form-group">
+                        <label>שם מלא:</label>
+                        <input type="text" name="fullName" required placeholder="ישראל ישראלי">
+                    </div>
+                    <div class="form-group">
+                        <label>טלפון:</label>
+                        <input type="tel" name="phone" required placeholder="050-0000000">
+                    </div>
+                    <div class="form-group">
+                        <label>סוג זנבנב:</label>
+                        <select name="tailType">
+                            <option value="classic">קלאסי</option>
+                            <option value="premium">פרימיום פרוותי</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn" id="btn">שלחו לי פרטים!</button>
+                </form>
+                <div id="responseMessage"></div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('znavnavForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn');
+            const msg = document.getElementById('responseMessage');
+            
+            btn.disabled = true;
+            btn.innerText = 'שולח...';
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            data.submittedAt = new Date().toLocaleString();
+
+            try {
+                const response = await fetch('https://hook.eu1.make.com/tulqyuukh1jm34jt5ogy4c7rruostyvg', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    msg.innerText = 'תודה! הפרטים התקבלו בהצלחה.';
+                    msg.className = 'success';
+                    msg.style.display = 'block';
+                    this.reset();
+                } else { throw new Error(); }
+            } catch (err) {
+                msg.innerText = 'שגיאה בשליחה. נסו שוב.';
+                msg.className = 'error';
+                msg.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'שלחו לי פרטים!';
+            }
+        });
+    </script>
+</body>
+</html>
